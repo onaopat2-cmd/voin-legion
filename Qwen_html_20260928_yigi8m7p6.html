@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEX & PARTNERS — Юридическая фирма</title>
+<style>
+  :root{
+    --navy:#0b2545;
+    --navy-light:#13315c;
+    --gold:#c9a961;
+    --gold-dark:#a8893f;
+    --bg:#f7f6f2;
+    --text:#1d1d1d;
+    --muted:#6b7280;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Georgia','Times New Roman',serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+  }
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* HEADER */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(11,37,69,.97);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(201,169,97,.2);
+  }
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+  .logo{
+    font-family:'Georgia',serif;
+    color:var(--white);
+    font-size:24px;
+    letter-spacing:3px;
+    font-weight:bold;
+  }
+  .logo span{color:var(--gold)}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{
+    color:var(--white);text-decoration:none;
+    font-family:'Helvetica','Arial',sans-serif;
+    font-size:14px;letter-spacing:1px;
+    text-transform:uppercase;
+    transition:color .3s;
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .burger{display:none;background:none;border:none;color:var(--white);font-size:28px;cursor:pointer}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    background:
+      linear-gradient(135deg,rgba(11,37,69,.92),rgba(19,49,92,.85)),
+      url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600') center/cover;
+    color:var(--white);
+    display:flex;align-items:center;
+    padding-top:80px;
+  }
+  .hero-content{max-width:720px}
+  .hero-tag{
+    color:var(--gold);
+    font-family:'Helvetica',sans-serif;
+    letter-spacing:4px;
+    font-size:13px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(36px,5vw,62px);
+    line-height:1.15;
+    margin-bottom:24px;
+    font-weight:normal;
+  }
+  .hero h1 em{color:var(--gold);font-style:italic}
+  .hero p{
+    font-size:18px;
+    margin-bottom:36px;
+    color:rgba(255,255,255,.85);
+    max-width:560px;
+  }
+  .btn{
+    display:inline-block;
+    padding:16px 36px;
+    background:var(--gold);
+    color:var(--navy);
+    text-decoration:none;
+    font-family:'Helvetica',sans-serif;
+    font-weight:bold;
+    letter-spacing:2px;
+    font-size:13px;
+    text-transform:uppercase;
+    border:2px solid var(--gold);
+    transition:all .3s;
+    cursor:pointer;
+  }
+  .btn:hover{background:transparent;color:var(--gold)}
+  .btn-outline{background:transparent;color:var(--white);border-color:var(--white);margin-left:12px}
+  .btn-outline:hover{background:var(--white);color:var(--navy)}
+
+  /* SECTIONS */
+  section{padding:100px 0}
+  .section-title{
+    text-align:center;
+    margin-bottom:60px;
+  }
+  .section-title small{
+    color:var(--gold);
+    font-family:'Helvetica',sans-serif;
+    letter-spacing:3px;
+    font-size:12px;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:12px;
+  }
+  .section-title h2{
+    font-size:clamp(28px,3.5vw,42px);
+    color:var(--navy);
+    font-weight:normal;
+  }
+  .section-title h2::after{
+    content:'';
+    display:block;
+    width:60px;height:2px;
+    background:var(--gold);
+    margin:20px auto 0;
+  }
+
+  /* SERVICES */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+  }
+  .service-card{
+    background:var(--white);
+    padding:40px 30px;
+    border:1px solid #e5e5e5;
+    transition:all .4s;
+    position:relative;
+  }
+  .service-card::before{
+    content:'';
+    position:absolute;top:0;left:0;
+    width:0;height:3px;
+    background:var(--gold);
+    transition:width .4s;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(11,37,69,.12);
+  }
+  .service-card:hover::before{width:100%}
+  .service-icon{
+    font-size:36px;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  .service-card h3{
+    color:var(--navy);
+    font-size:22px;
+    margin-bottom:14px;
+    font-weight:normal;
+  }
+  .service-card p{color:var(--muted);font-size:15px}
+
+  /* ABOUT / STATS */
+  .about{background:var(--navy);color:var(--white)}
+  .about .section-title h2{color:var(--white)}
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .about-text p{margin-bottom:18px;color:rgba(255,255,255,.85);font-size:16px}
+  .stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+  }
+  .stat{
+    text-align:center;
+    padding:30px 20px;
+    border:1px solid rgba(201,169,97,.3);
+  }
+  .stat-num{
+    font-size:48px;
+    color:var(--gold);
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+  }
+  .stat-label{
+    font-family:'Helvetica',sans-serif;
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,.7);
+  }
+
+  /* TEAM */
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:30px;
+  }
+  .team-card{text-align:center}
+  .team-photo{
+    width:100%;
+    aspect-ratio:3/4;
+    background:linear-gradient(135deg,var(--navy),var(--navy-light));
+    margin-bottom:20px;
+    position:relative;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+    font-size:80px;
+    font-family:'Georgia',serif;
+  }
+  .team-card h3{color:var(--navy);font-size:20px;margin-bottom:6px;font-weight:normal}
+  .team-card .role{
+    color:var(--gold);
+    font-family:'Helvetica',sans-serif;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials{background:var(--bg)}
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+  }
+  .testi-card{
+    background:var(--white);
+    padding:36px;
+    border-left:3px solid var(--gold);
+  }
+  .testi-card p{
+    font-style:italic;
+    color:var(--text);
+    margin-bottom:20px;
+    font-size:16px;
+  }
+  .testi-author{
+    font-family:'Helvetica',sans-serif;
+    font-size:13px;
+    letter-spacing:1px;
+    color:var(--navy);
+    font-weight:bold;
+  }
+  .testi-author span{display:block;color:var(--muted);font-weight:normal;margin-top:4px}
+
+  /* CONTACT */
+  .contact{background:var(--navy);color:var(--white)}
+  .contact .section-title h2{color:var(--white)}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+  }
+  .contact-info p{margin-bottom:16px;color:rgba(255,255,255,.85)}
+  .contact-info strong{color:var(--gold);display:block;margin-bottom:4px;font-family:'Helvetica',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  .contact-form{display:flex;flex-direction:column;gap:16px}
+  .contact-form input,
+  .contact-form textarea{
+    padding:14px 16px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(201,169,97,.3);
+    color:var(--white);
+    font-family:inherit;
+    font-size:15px;
+    outline:none;
+    transition:border-color .3s;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus{border-color:var(--gold)}
+  .contact-form textarea{resize:vertical;min-height:120px}
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{color:rgba(255,255,255,.5)}
+
+  /* FOOTER */
+  footer{
+    background:#061a33;
+    color:rgba(255,255,255,.6);
+    padding:30px 0;
+    text-align:center;
+    font-family:'Helvetica',sans-serif;
+    font-size:13px;
+    letter-spacing:1px;
+  }
+  footer span{color:var(--gold)}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    .nav-links{
+      position:fixed;
+      top:70px;left:0;right:0;
+      background:var(--navy);
+      flex-direction:column;
+      padding:30px;
+      gap:20px;
+      transform:translateY(-150%);
+      transition:transform .3s;
+    }
+    .nav-links.active{transform:translateY(0)}
+    .burger{display:block}
+    .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+    .btn-outline{margin-left:0;margin-top:12px}
+    section{padding:70px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">LEX <span>&</span> PARTNERS</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#services">Услуги</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#team">Команда</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="burger" id="burger">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="hero-tag">Юридическая фирма · с 2008 года</div>
+    <h1>Защищаем ваши интересы <em>с безупречной точностью</em></h1>
+    <p>Комплексное юридическое сопровождение бизнеса и частных лиц. Более 18 лет опыта, свыше 2 500 выигранных дел, команда из 24 практикующих юристов.</p>
+    <a href="#contact" class="btn">Получить консультацию</a>
+    <a href="#services" class="btn btn-outline">Наши услуги</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-title">
+      <small>Направления работы</small>
+      <h2>Наши услуги</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">⚖️</div>
+        <h3>Корпоративное право</h3>
+        <p>Регистрация, реорганизация, сопровождение сделок M&A, корпоративные споры, due diligence.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏛️</div>
+        <h3>Налоговое право</h3>
+        <p>Налоговое планирование, сопровождение проверок, обжалование актов налоговых органов.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Недвижимость и земля</h3>
+        <p>Сопровождение сделок, регистрация прав, земельные споры, строительство и аренда.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👨‍👩‍👧</div>
+        <h3>Семейное право</h3>
+        <p>Разводы, раздел имущества, алименты, брачные договоры, споры о детях.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Уголовное право</h3>
+        <p>Защита на всех стадиях процесса, экономические преступления, обжалование приговоров.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📜</div>
+        <h3>Арбитраж и суды</h3>
+        <p>Представительство в арбитражных и судах общей юрисдикции, исполнение решений.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-title">
+      <small>О компании</small>
+      <h2>Почему выбирают нас</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>LEX & PARTNERS — это команда опытных юристов, объединённых единым стандартом качества. Мы работаем с бизнесом любого масштаба и частными клиентами, для которых важны конфиденциальность, результат и предсказуемость.</p>
+        <p>Наш подход — глубокое погружение в задачу клиента, прозрачное ценообразование и персональная ответственность каждого партнёра за ведение дела.</p>
+        <p>Мы входим в ТОП-50 юридических фирм по версии ведущего отраслевого рейтинга и являемся членами Международной ассоциации юристов (IBA).</p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-num">18+</span>
+          <span class="stat-label">лет на рынке</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2500+</span>
+          <span class="stat-label">выигранных дел</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">24</span>
+          <span class="stat-label">практикующих юриста</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">довольных клиентов</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="section-title">
+      <small>Наша команда</small>
+      <h2>Ведущие партнёры</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">АК</div>
+        <h3>Александр Корнев</h3>
+        <div class="role">Управляющий партнёр</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">ЕС</div>
+        <h3>Елена Соколова</h3>
+        <div class="role">Партнёр · Налоговое право</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">ДМ</div>
+        <h3>Дмитрий Морозов</h3>
+        <div class="role">Партнёр · Арбитраж</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo">ОВ</div>
+        <h3>Ольга Виноградова</h3>
+        <div class="role">Партнёр · Семейное право</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <small>Отзывы</small>
+      <h2>Что говорят клиенты</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p>«Сопровождали сложную сделку по покупке бизнеса. Профессионализм на каждом этапе, ни одного срыва сроков. Рекомендую без оговорок.»</p>
+        <div class="testi-author">Михаил Р.<span>Генеральный директор, производственный холдинг</span></div>
+      </div>
+      <div class="testi-card">
+        <p>«Выиграли налоговый спор, где другие юристы видели безнадёжную ситуацию. Экономия для компании составила более 40 млн рублей.»</p>
+        <div class="testi-author">Анна Л.<span>Финансовый директор, IT-компания</span></div>
+      </div>
+      <div class="testi-card">
+        <p>«Очень деликатно и грамотно провели сложный бракоразводный процесс. Благодарна за человеческое отношение и безупречный результат.»</p>
+        <div class="testi-author">Ирина К.<span>Частный клиент</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-title">
+      <small>Связаться с нами</small>
+      <h2>Запишитесь на консультацию</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p><strong>Адрес</strong>г. Москва, ул. Тверская, д. 12, офис 405</p>
+        <p><strong>Телефон</strong>+7 (495) 123-45-67</p>
+        <p><strong>Email</strong>info@lex-partners.ru</p>
+        <p><strong>Часы работы</strong>Пн–Пт: 09:00 – 19:00<br>Сб: по записи</p>
+        <p style="margin-top:24px;font-style:italic;color:rgba(255,255,255,.6)">Первая консультация — бесплатно. Мы ответим в течение 2 часов в рабочее время.</p>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Спасибо! Мы свяжемся с вами в ближайшее время.');this.reset();">
+        <input type="text" placeholder="Ваше имя" required>
+        <input type="tel" placeholder="Телефон" required>
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Опишите вашу ситуацию" required></textarea>
+        <button type="submit" class="btn">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2026 <span>LEX & PARTNERS</span> · Все права защищены · Политика конфиденциальности
+  </div>
+</footer>
+
+<script>
+  // Мобильное меню
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('active'));
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('active'))
+  );
+</script>
+</body>
+</html>
